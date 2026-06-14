@@ -28,3 +28,32 @@ async function getObservation(placeId) {
 
     displayResults(data.results);
 }
+
+function displayResults(observation) {
+    results.innerHTML = "";
+
+    for (let i = 0; i < observation.length; i++) {
+
+        const observations = observation[i];
+
+        if (observations.taxon != null) {
+            
+            if (observations.taxon.default_photo != null) {
+
+                const card = document.createElement("div");
+
+                const image = document.createElement("img");
+                image.src = observations.taxon.default_photo.medium_url;
+
+                const name = document.createElement("h3");
+                name.textContent = observations.taxon.name;
+
+                card.appendChild(image);
+
+                card.appendChild(name);
+
+                results.appendChild(card);
+            }
+        }
+    }
+}
